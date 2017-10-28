@@ -1,5 +1,5 @@
 import express from 'express'
-import cors from 'cors'
+// import cors from 'cors'
 import path from 'path'
 import bodyParser from 'body-parser'
 import expressValidator from 'express-validator'
@@ -18,10 +18,10 @@ const app = express()
 // console.log('ENV: ', app.get('env'))
 
 // match origin for api access
-const corsOptions = {
+export const corsOptions = {
   origin: (app.get('env') === 'development'
     ? /https?:\/\/localhost:\d+/
-    : [/\.netlify\.com$/, 'https://fcccolumbus.com/', /https?:\/\/localhost:\d+/]),
+    : [/\.netlify\.com$/, /https?:\/\/fcccolumbus\.com.+$/, /https?:\/\/localhost:\d+/]),
   methods: 'GET',
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
@@ -30,7 +30,7 @@ const corsOptions = {
 app.set('views', path.join(__dirname, 'views')) // this is where our pug files live
 app.set('view engine', 'pug') // uses the pug (jade) engine
 
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
 
 // serve up static files from the public folder
 app.use(express.static(path.join(__dirname, 'public')))
