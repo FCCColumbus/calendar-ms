@@ -1,0 +1,16 @@
+{
+  "name": "fccc-api",
+  "scripts": {
+  },
+  "env": {
+    "NPM_CONFIG_PRODUCTION": "false"
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ]
+}

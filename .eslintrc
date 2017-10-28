@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "standard",
+    "eslint:recommended",
+  ],
+  "parser": "babel-eslint",
+  "plugins": [],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "rules": {
+    "no-console": [2, {"allow": ["warn", "error"]}],
+    "comma-dangle": [2, "always-multiline"],
+    "semi": [2, "never"],
+    "no-extra-semi": 2,
+    "jsx-quotes": [2, "prefer-single"]
+  }
+}

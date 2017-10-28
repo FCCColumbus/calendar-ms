@@ -1,19 +1,36 @@
 import express from 'express'
-import session from 'express-session'
+import cors from 'cors'
 import path from 'path'
 import bodyParser from 'body-parser'
-import promisify from 'es6-promisify'
 import expressValidator from 'express-validator'
+import dotenv from 'dotenv'
+
 import routes from './routes/index'
 import helpers from './helpers'
 import { notFound, developmentErrors, productionErrors } from './handlers/errorHandlers'
 
+dotenv.config({ path: 'variables.env' })
+
 // create app
 const app = express()
+
+// eslint-disable-next-line no-console
+// console.log('ENV: ', app.get('env'))
+
+// match origin for api access
+const corsOptions = {
+  origin: (app.get('env') === 'development'
+    ? /https?:\/\/localhost:\d+/
+    : [/\.netlify\.com$/, 'https://fcccolumbus.com/', /https?:\/\/localhost:\d+/]),
+  methods: 'GET',
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views')) // this is where our pug files live
 app.set('view engine', 'pug') // uses the pug (jade) engine
+
+app.use(cors(corsOptions))
 
 // serve up static files from the public folder
 app.use(express.static(path.join(__dirname, 'public')))

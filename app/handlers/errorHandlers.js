@@ -30,6 +30,7 @@ export const developmentErrors = (err, req, res, next) => {
   // validation errors look like
   const errorKeys = Object.keys(err.errors)
 
+  // eslint-disable-next-line no-console
   errorKeys.forEach((key) => console.log(err.errors[key].message))
   res.redirect('back')
 }
